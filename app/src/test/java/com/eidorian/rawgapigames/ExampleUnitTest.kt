@@ -1,4 +1,4 @@
-package com.eidorian.galappxy
+package com.eidorian.rawgapigames
 
 import org.junit.Test
 

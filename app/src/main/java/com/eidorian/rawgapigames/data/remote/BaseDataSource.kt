@@ -1,6 +1,6 @@
-package com.eidorian.galappxy.data.remote
+package com.eidorian.rawgapigames.data.remote
 
-import com.eidorian.galappxy.data.entities.Resource
+import com.eidorian.rawgapigames.data.entity.Resource
 import retrofit2.Response
 
 abstract class BaseDataSource {

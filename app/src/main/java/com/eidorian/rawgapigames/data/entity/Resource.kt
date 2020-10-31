@@ -1,4 +1,4 @@
-package com.eidorian.galappxy.data.entities
+package com.eidorian.rawgapigames.data.entity
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
