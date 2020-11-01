@@ -1,12 +1,8 @@
 package com.eidorian.rawgapigames.data.entity
 
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+import com.eidorian.rawgapigames.utils.Status
 
-    enum class Status {
-        SUCCESS,
-        ERROR,
-        LOADING
-    }
+data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
     companion object {
         fun <T> success(data: T): Resource<T> {
@@ -15,10 +11,6 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
 
         fun <T> error(message: String, data: T? = null): Resource<T> {
             return Resource(Status.ERROR, data, message)
-        }
-
-        fun <T> loading(data: T? = null): Resource<T> {
-            return Resource(Status.LOADING, data, null)
         }
     }
 }

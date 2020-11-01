@@ -3,6 +3,7 @@ package com.eidorian.rawgapigames.presentation.di
 import com.eidorian.rawgapigames.data.remote.ApiService
 import com.eidorian.rawgapigames.data.remote.GamesRemoteDataSource
 import com.eidorian.rawgapigames.data.repository.GamesRepository
+import com.eidorian.rawgapigames.domain.usecases.GetGamesUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -54,4 +55,8 @@ object AppModule {
     fun provideCharacterRemoteDataSource(apiService: ApiService) =
         GamesRemoteDataSource(apiService)
 
+    @Singleton
+    @Provides
+    fun provideGamesUseCase(repository: GamesRepository) =
+        GetGamesUseCase(repository)
 }

@@ -6,6 +6,7 @@ import javax.inject.Inject
 class GamesRepository @Inject constructor(
     private val remoteDataSource: GamesRemoteDataSource
 ) {
-    suspend fun getTodayPicture() = remoteDataSource.getTodayPicture()
+    //TODO: Agregar logica para buscar de manera local antes de remota
+    suspend fun getGamesList() = remoteDataSource.getGamesList()
 
 }
