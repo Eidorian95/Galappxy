@@ -8,8 +8,6 @@ data class GamesResponse(
     val count: Int,
     @SerializedName("description")
     val description: String,
-    @SerializedName("filters")
-    val filters: Filters,
     @SerializedName("next")
     val next: String,
     @SerializedName("nofollow")
@@ -31,37 +29,6 @@ data class GamesResponse(
     @SerializedName("seo_title")
     val seoTitle: String
 ) {
-    data class Filters(
-        @SerializedName("years")
-        val years: List<Year>
-    ) {
-        data class Year(
-            @SerializedName("count")
-            val count: Int,
-            @SerializedName("decade")
-            val decade: Int,
-            @SerializedName("filter")
-            val filter: String,
-            @SerializedName("from")
-            val from: Int,
-            @SerializedName("nofollow")
-            val nofollow: Boolean,
-            @SerializedName("to")
-            val to: Int,
-            @SerializedName("years")
-            val years: List<Year>
-        ) {
-            data class Year(
-                @SerializedName("count")
-                val count: Int,
-                @SerializedName("nofollow")
-                val nofollow: Boolean,
-                @SerializedName("year")
-                val year: Int
-            )
-        }
-    }
-
     data class Result(
         @SerializedName("added")
         val added: Int,

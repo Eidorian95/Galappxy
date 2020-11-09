@@ -5,15 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eidorian.rawgapigames.presentation.model.Picture
-import com.eidorian.rawgapigames.data.repository.GamesRepository
+import com.eidorian.rawgapigames.presentation.ViewState
+import com.eidorian.rawgapigames.domain.usecases.GetGamesUseCase
+import com.eidorian.rawgapigames.presentation.model.Game
+import com.eidorian.rawgapigames.utils.Status
+import com.eidorian.rawgapigames.utils.Status.*
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
-    private val gamesRepository: GamesRepository
+    private val gamesUseCase: GetGamesUseCase
 ) : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
-    private val _picture = MutableLiveData<Picture>()
+    private val _viewState = MutableLiveData<ViewState<List<Game>>>()
 
     init {
         getTodayPicture()
@@ -22,11 +25,17 @@ class MainViewModel @ViewModelInject constructor(
     private fun getTodayPicture() {
         _loading.value = true
         viewModelScope.launch {
-            _picture.value = gamesRepository.getTodayPicture().data
+            gamesUseCase.getGamesList(
+                {
+                    _viewState.value = ViewState(SUCCESS, it)
+                },
+                {
+                    _viewState.value = ViewState(ERROR, null, it)
+                })
             _loading.value = false
         }
     }
 
-    fun getPicture(): LiveData<Picture> = _picture
+    fun getPicture(): LiveData<ViewState<List<Game>>> = _viewState
     fun isLoading(): LiveData<Boolean> = _loading
 }
