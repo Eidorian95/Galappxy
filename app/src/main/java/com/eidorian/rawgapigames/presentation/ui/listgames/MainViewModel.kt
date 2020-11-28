@@ -1,4 +1,4 @@
-package com.eidorian.rawgapigames.presentation.ui.main
+package com.eidorian.rawgapigames.presentation.ui.listgames
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.eidorian.rawgapigames.presentation.ViewState
 import com.eidorian.rawgapigames.domain.usecases.GetGamesUseCase
 import com.eidorian.rawgapigames.presentation.model.Game
-import com.eidorian.rawgapigames.utils.Status
 import com.eidorian.rawgapigames.utils.Status.*
 import kotlinx.coroutines.launch
 
@@ -19,7 +18,6 @@ class MainViewModel @ViewModelInject constructor(
     private val _viewState = MutableLiveData<ViewState<List<Game>>>()
 
     init {
-        //getTodayPicture()
         getGames()
     }
 

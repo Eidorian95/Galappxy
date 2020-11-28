@@ -1,17 +1,16 @@
-package com.eidorian.rawgapigames.presentation.ui.main
+package com.eidorian.rawgapigames.presentation.ui.listgames
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
+import android.widget.ListAdapter
 import androidx.activity.viewModels
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eidorian.rawgapigames.R
 import com.eidorian.rawgapigames.databinding.ActivityMainBinding
-import com.eidorian.rawgapigames.presentation.ViewState
-import com.eidorian.rawgapigames.presentation.model.Game
-import com.eidorian.rawgapigames.utils.Status
-import com.eidorian.rawgapigames.utils.Status.ERROR
 import com.eidorian.rawgapigames.utils.Status.SUCCESS
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,11 +24,17 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        val recycler = binding.listGames
+        val adapter = ListGamesAdapter()
+        recycler.adapter = adapter
+        recycler.hasFixedSize()
 
         viewModel.getGamesList().observe(this, Observer { viewState ->
             when(viewState.state){
-                SUCCESS ->  binding.tvGames.text = viewState.data.toString()
-                else -> binding.tvGames.text = viewState.message
+                SUCCESS ->{
+                    adapter.setData(viewState.data)
+                }
+                else -> binding.listGames.setBackgroundColor(resources.getColor(R.color.colorAccent))
             }
         })
     }

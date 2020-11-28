@@ -47,6 +47,7 @@ class GetGamesUseCase @Inject constructor(private val repository: GamesRepositor
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ games ->
+                    //TODO: Map this class using extension function
                     onSuccess(games?.results?.map {
                         Game(
                             it.id,
