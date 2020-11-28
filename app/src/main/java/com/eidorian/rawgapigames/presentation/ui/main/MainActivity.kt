@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.getPicture().observe(this, Observer { viewState ->
+        viewModel.getGamesList().observe(this, Observer { viewState ->
             when(viewState.state){
-                SUCCESS -> viewState.data?.forEach { print(it.toString()) }
-                else -> print(viewState.message)
+                SUCCESS ->  binding.tvGames.text = viewState.data.toString()
+                else -> binding.tvGames.text = viewState.message
             }
         })
     }

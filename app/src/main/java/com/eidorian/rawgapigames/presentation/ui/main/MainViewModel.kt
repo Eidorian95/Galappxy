@@ -19,7 +19,8 @@ class MainViewModel @ViewModelInject constructor(
     private val _viewState = MutableLiveData<ViewState<List<Game>>>()
 
     init {
-        getTodayPicture()
+        //getTodayPicture()
+        getGames()
     }
 
     private fun getTodayPicture() {
@@ -36,6 +37,16 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
-    fun getPicture(): LiveData<ViewState<List<Game>>> = _viewState
+    private fun getGames() {
+        _loading.value = true
+        gamesUseCase.getGamesListRxJava({
+            _viewState.value = ViewState(SUCCESS, it)
+            _loading.value = false
+        }, {
+            _viewState.value = ViewState(ERROR, null, it.message)
+        })
+    }
+
+    fun getGamesList(): LiveData<ViewState<List<Game>>> = _viewState
     fun isLoading(): LiveData<Boolean> = _loading
 }

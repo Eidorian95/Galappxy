@@ -9,4 +9,5 @@ class GamesRepository @Inject constructor(
     //TODO: Agregar logica para buscar de manera local antes de remota
     suspend fun getGamesList() = remoteDataSource.getGamesList()
 
+    fun getGamesListRxJava() = remoteDataSource.getGamesListRxJava()
 }

@@ -6,4 +6,6 @@ class GamesRemoteDataSource @Inject constructor(private val apiService: ApiServi
     BaseDataSource() {
 
     suspend fun getGamesList() = getResult { apiService.getGamesList() }
+
+    fun getGamesListRxJava() = apiService.getGamesListRxJava()
 }
