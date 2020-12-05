@@ -247,13 +247,19 @@ data class GamesResponse(
     }
 }
 
-fun GamesResponse.toGame() = this.results.map {
+fun GamesResponse.toGame() = this.results.map { it ->
     Game(
         it.id,
         it.name,
         it.released,
         it.backgroundImage,
         it.rating,
-        it.ratingTop
+        it.ratingTop,
+        it.parentPlatforms.map { parent ->
+            Game.Platform(
+                parent.platform.id,
+                parent.platform.slug
+            )
+        }
     )
 }

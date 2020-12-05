@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eidorian.rawgapigames.R
 import com.eidorian.rawgapigames.presentation.model.Game
-import com.eidorian.rawgapigames.presentation.ui.listgames.ListGamesAdapter.*
+import com.eidorian.rawgapigames.presentation.ui.listgames.ListGamesAdapter.ListViewHolder
 import kotlinx.android.synthetic.main.game_card_item.view.*
 
 class ListGamesAdapter : RecyclerView.Adapter<ListViewHolder>() {
@@ -42,10 +42,14 @@ class ListGamesAdapter : RecyclerView.Adapter<ListViewHolder>() {
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(itemView.image_game)
-
             itemView.rating_game.text = game.rating.toString()
+            setPlatformList(game.platforms)
 
             //TODO: Set image rating (exceptional, recommended, meh, skip) using an Image Utils
+        }
+
+        private fun setPlatformList(platforms: List<Game.Platform>) {
+            itemView.list_platform.adapter = ListPlatformAdapter().apply { setData(platforms) }
         }
     }
 }

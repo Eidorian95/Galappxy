@@ -1,14 +1,10 @@
 package com.eidorian.rawgapigames.presentation.ui.listgames
 
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.ListAdapter
 import androidx.activity.viewModels
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.eidorian.rawgapigames.R
 import com.eidorian.rawgapigames.databinding.ActivityMainBinding
 import com.eidorian.rawgapigames.utils.Status.SUCCESS
