@@ -21,20 +21,6 @@ class MainViewModel @ViewModelInject constructor(
         getGames()
     }
 
-    private fun getTodayPicture() {
-        _loading.value = true
-        viewModelScope.launch {
-            gamesUseCase.getGamesList(
-                {
-                    _viewState.value = ViewState(SUCCESS, it)
-                },
-                {
-                    _viewState.value = ViewState(ERROR, null, it)
-                })
-            _loading.value = false
-        }
-    }
-
     private fun getGames() {
         _loading.value = true
         gamesUseCase.getGamesListRxJava({

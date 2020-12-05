@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.eidorian.rawgapigames.R
 import com.eidorian.rawgapigames.presentation.model.Game
 import com.eidorian.rawgapigames.presentation.ui.listgames.ListGamesAdapter.*
@@ -34,7 +35,17 @@ class ListGamesAdapter : RecyclerView.Adapter<ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(game: Game) {
+            //TODO: Implement data binding
             itemView.title_game.text = game.name
+            Glide.with(itemView.context)
+                .load(game.backgroundImage)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(itemView.image_game)
+
+            itemView.rating_game.text = game.rating.toString()
+
+            //TODO: Set image rating (exceptional, recommended, meh, skip) using an Image Utils
         }
     }
 }

@@ -7,8 +7,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("games")
-    suspend fun getGamesList() : Response<GamesResponse>
-
-    @GET("games")
-    fun getGamesListRxJava() : Single<GamesResponse>
+    fun getGamesListRxJava(): Single<GamesResponse>
 }

@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rating_game"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ImageView
