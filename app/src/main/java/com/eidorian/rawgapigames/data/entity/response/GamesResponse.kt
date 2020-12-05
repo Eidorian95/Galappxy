@@ -1,6 +1,8 @@
 package com.eidorian.rawgapigames.data.entity.response
 
 
+import com.eidorian.rawgapigames.data.entity.response.GamesResponse.*
+import com.eidorian.rawgapigames.presentation.model.Game
 import com.google.gson.annotations.SerializedName
 
 data class GamesResponse(
@@ -243,4 +245,15 @@ data class GamesResponse(
             val slug: String
         )
     }
+}
+
+fun GamesResponse.toGame() = this.results.map {
+    Game(
+        it.id,
+        it.name,
+        it.released,
+        it.backgroundImage,
+        it.rating,
+        it.ratingTop
+    )
 }

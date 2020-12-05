@@ -1,5 +1,6 @@
 package com.eidorian.rawgapigames.domain.usecases
 
+import com.eidorian.rawgapigames.data.entity.response.toGame
 import com.eidorian.rawgapigames.data.repository.GamesRepository
 import com.eidorian.rawgapigames.presentation.model.Game
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,18 +18,8 @@ class GetGamesUseCase @Inject constructor(private val repository: GamesRepositor
             repository.getGamesListRxJava()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ games ->
-                    //TODO: Map this class using extension function
-                    onSuccess(games?.results?.map {
-                        Game(
-                            it.id,
-                            it.name,
-                            it.released,
-                            it.backgroundImage,
-                            it.rating,
-                            it.ratingTop
-                        )
-                    })
+                .subscribe({ gamesResponse ->
+                    onSuccess(gamesResponse.toGame())
                 }, { t ->
                     onError(t)
                 })
