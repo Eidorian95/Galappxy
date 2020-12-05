@@ -6,8 +6,6 @@ import javax.inject.Inject
 class GamesRepository @Inject constructor(
     private val remoteDataSource: GamesRemoteDataSource
 ) {
-    //TODO: Agregar logica para buscar de manera local antes de remota
-    suspend fun getGamesList() = remoteDataSource.getGamesList()
-
+    //TODO: Add logic to search in local DB before remote
     fun getGamesListRxJava() = remoteDataSource.getGamesListRxJava()
 }

@@ -1,10 +1,14 @@
 package com.eidorian.rawgapigames.presentation.model
 
 data class Game(
-    private val id: Int,
-    private val name: String,
-    private val release: String,
-    private val backgroundImage: String,
-    private val rating: Double,
-    private val ratingTop: Int
-)
+    val id: Int,
+    val name: String,
+    val release: String,
+    val backgroundImage: String,
+    val rating: Double,
+    val ratingTop: Int,
+    val platforms: List<Platform>
+) {
+    data class Platform(val id: Int,
+                        val slug: String)
+}
