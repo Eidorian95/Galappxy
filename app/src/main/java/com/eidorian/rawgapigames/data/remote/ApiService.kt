@@ -10,5 +10,12 @@ interface ApiService {
     fun getGamesList(): Single<GamesResponse>
 
     @GET("games")
-    fun searchGameByName(@Query("search") search:String): Single<GamesResponse>
+    fun searchGameByName(@Query("search") search: String): Single<GamesResponse>
+
+    @GET("games")
+    fun orderGamesBy(
+        @Query("ordering") ordering: String,
+        @Query("search") search: String
+    ): Single<GamesResponse>
+
 }

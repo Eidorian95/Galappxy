@@ -10,4 +10,6 @@ class GamesRepository @Inject constructor(
     fun getGamesList() = remoteDataSource.getGamesList()
 
     fun searchGameByName(name: String) = remoteDataSource.searchGameByName(name)
+
+    fun orderGamesBy(ordering: String, search: String) = remoteDataSource.orderGamesBy(ordering, search)
 }

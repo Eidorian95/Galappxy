@@ -3,4 +3,10 @@
     <string name="title_game_example">Sea of Thieves</string>
     <string name="title_game_example_2">Assassins Cred: Valhalla y la vegananza de Ezio Auditore</string>
     <string name="rating_game">9.9</string>
+    <string name="relevance">Relevance</string>
+    <string name="rating">Rating</string>
+    <string name="released">Released</string>
+    <string name="order_by">Order by</string>
+    <string name="example_search_text">e.g: Cyberpunk 2077</string>
+    <string name="bt_search">Search</string>
 </resources>

@@ -36,10 +36,19 @@ class MainViewModel @ViewModelInject constructor(
             {
                 _viewState.value = ViewState(SUCCESS, it)
                 _loading.value = false
-            },
-            {
+            }, {
                 _viewState.value = ViewState(ERROR, null, it.message)
             })
+    }
+
+    fun orderGamesBy(name: String, search: String) {
+        _loading.value = true
+        gamesUseCase.orderGamesBy(name, search, {
+            _viewState.value = ViewState(SUCCESS, it)
+            _loading.value = false
+        }, {
+            _viewState.value = ViewState(ERROR, null, it.message)
+        })
     }
 
     fun getGamesList(): LiveData<ViewState<List<Game>>> = _viewState
