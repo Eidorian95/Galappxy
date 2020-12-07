@@ -1,5 +1,7 @@
 package com.eidorian.rawgapigames.presentation.ui.listgames
 
+import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eidorian.rawgapigames.R
 import com.eidorian.rawgapigames.presentation.model.Game
+import com.eidorian.rawgapigames.presentation.ui.gamedetails.GameDetailsActivity
 import com.eidorian.rawgapigames.presentation.ui.listgames.ListGamesAdapter.ListViewHolder
 import kotlinx.android.synthetic.main.game_card_item.view.*
 
@@ -37,16 +40,24 @@ class ListGamesAdapter : RecyclerView.Adapter<ListViewHolder>() {
         fun bind(game: Game) {
             //TODO: Implement data binding
             itemView.title_game.text = game.name
+            itemView.rating_game.text = game.rating.toString()
+
             Glide.with(itemView.context)
                 .load(game.backgroundImage)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(itemView.image_game)
-            itemView.rating_game.text = game.rating.toString()
+
             setPlatformList(game.platforms)
 
-            //TODO: Set image rating (exceptional, recommended, meh, skip) using an Image Utils
+            itemView.card_container.setOnClickListener {
+                val context = it.context
+                context.startActivity(Intent(context, GameDetailsActivity::class.java).apply {
+                    putExtra("GAME_ID", game.id)
+                })
+            }
         }
+
 
         private fun setPlatformList(platforms: List<Game.Platform>?) {
             itemView.list_platform.adapter = ListPlatformAdapter().apply { setData(platforms) }

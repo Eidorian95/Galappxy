@@ -3,7 +3,7 @@ package com.eidorian.rawgapigames.data.entity.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GameDetailResponse(
+data class GameDetailsResponse(
     @SerializedName("achievements_count")
     val achievementsCount: Int,
     @SerializedName("added")
@@ -308,7 +308,9 @@ data class GameDetailResponse(
         @SerializedName("7")
         val x7: Int,
         @SerializedName("8")
-        val x8: Int
+        val x8: Int,
+        @SerializedName("9")
+        val x9: Int
     )
 
     data class Store(

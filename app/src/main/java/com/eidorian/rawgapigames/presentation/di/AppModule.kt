@@ -3,6 +3,7 @@ package com.eidorian.rawgapigames.presentation.di
 import com.eidorian.rawgapigames.data.remote.ApiService
 import com.eidorian.rawgapigames.data.remote.GamesRemoteDataSource
 import com.eidorian.rawgapigames.data.repository.GamesRepository
+import com.eidorian.rawgapigames.domain.usecases.GameDetailsUseCase
 import com.eidorian.rawgapigames.domain.usecases.GetGamesUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -11,6 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -32,6 +34,7 @@ object AppModule {
                 request.url(url.toString())
                 return@addInterceptor chain.proceed(request.build())
             }
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
             .build()
 
         return Retrofit.Builder()
@@ -61,4 +64,9 @@ object AppModule {
     @Provides
     fun provideGamesUseCase(repository: GamesRepository) =
         GetGamesUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun provideGameDetailsUseCase(repository: GamesRepository) =
+        GameDetailsUseCase(repository)
 }

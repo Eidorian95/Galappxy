@@ -9,4 +9,6 @@ class GamesRemoteDataSource @Inject constructor(private val apiService: ApiServi
     fun searchGameByName(name: String) = apiService.searchGameByName(name)
 
     fun orderGamesBy(ordering: String, search: String) = apiService.orderGamesBy(ordering, search)
+
+    fun getGameDetails(id: Int) = apiService.getGameDetails(id)
 }
