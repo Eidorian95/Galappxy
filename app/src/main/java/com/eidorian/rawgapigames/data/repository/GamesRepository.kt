@@ -7,5 +7,7 @@ class GamesRepository @Inject constructor(
     private val remoteDataSource: GamesRemoteDataSource
 ) {
     //TODO: Add logic to search in local DB before remote
-    fun getGamesListRxJava() = remoteDataSource.getGamesListRxJava()
+    fun getGamesList() = remoteDataSource.getGamesList()
+
+    fun searchGameByName(name: String) = remoteDataSource.searchGameByName(name)
 }

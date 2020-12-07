@@ -30,8 +30,13 @@ class MainActivity : AppCompatActivity() {
                 SUCCESS ->{
                     adapter.setData(viewState.data)
                 }
-                else -> binding.listGames.setBackgroundColor(resources.getColor(R.color.colorAccent))
+                else -> binding.listGames.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             }
         })
+
+        binding.btSearch.setOnClickListener {
+            val name = binding.etSearchGame.text.toString()
+            viewModel.searchGame(name)
+        }
     }
 }
