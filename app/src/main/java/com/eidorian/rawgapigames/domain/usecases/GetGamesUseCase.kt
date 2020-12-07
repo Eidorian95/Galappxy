@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetGamesUseCase @Inject constructor(private val repository: GamesRepository) : BaseUSeCase() {
 
     fun getGamesList(
-        onSuccess: ((t: List<Game>?) -> Unit),
+        onSuccess: ((games: List<Game>?) -> Unit),
         onError: ((t: Throwable) -> Unit)
     ) {
         makeCall({ repository.getGamesList() },
@@ -27,7 +27,7 @@ class GetGamesUseCase @Inject constructor(private val repository: GamesRepositor
 
     fun searchGameByName(
         name: String,
-        onSuccess: (t: List<Game>?) -> Unit,
+        onSuccess: (games: List<Game>?) -> Unit,
         onError: (t: Throwable) -> Unit
     ) {
         makeCall(
@@ -43,4 +43,22 @@ class GetGamesUseCase @Inject constructor(private val repository: GamesRepositor
             })
     }
 
+    fun orderGamesBy(
+        ordering: String,
+        search: String,
+        onSuccess: (games: List<Game>?) -> Unit,
+        onError: (t: Throwable) -> Unit
+    ) {
+        makeCall({ repository.orderGamesBy(ordering, search) },
+            object : UseCaseCallback<GamesResponse> {
+                override fun onSuccess(data: GamesResponse) {
+                    onSuccess(data.toGame())
+                }
+
+                override fun onError(t: Throwable) {
+                    onError(t)
+                }
+
+            })
+    }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_relevance"
+        android:title="@string/relevance"/>
+
+    <item
+        android:id="@+id/menu_rating"
+        android:title="@string/rating" />
+
+    <item
+        android:id="@+id/menu_released"
+        android:title="@string/released"
+        />
+</menu>
