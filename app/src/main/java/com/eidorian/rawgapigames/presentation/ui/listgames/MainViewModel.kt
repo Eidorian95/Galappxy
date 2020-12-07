@@ -22,12 +22,24 @@ class MainViewModel @ViewModelInject constructor(
 
     private fun getGames() {
         _loading.value = true
-        gamesUseCase.getGamesListRxJava({
+        gamesUseCase.getGamesList({
             _viewState.value = ViewState(SUCCESS, it)
             _loading.value = false
         }, {
             _viewState.value = ViewState(ERROR, null, it.message)
         })
+    }
+
+    fun searchGame(name: String) {
+        _loading.value = true
+        gamesUseCase.searchGameByName(name,
+            {
+                _viewState.value = ViewState(SUCCESS, it)
+                _loading.value = false
+            },
+            {
+                _viewState.value = ViewState(ERROR, null, it.message)
+            })
     }
 
     fun getGamesList(): LiveData<ViewState<List<Game>>> = _viewState

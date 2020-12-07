@@ -51,7 +51,7 @@ data class GamesResponse(
         @SerializedName("name")
         val name: String,
         @SerializedName("parent_platforms")
-        val parentPlatforms: List<ParentPlatform>,
+        val parentPlatforms: List<ParentPlatform>?,
         @SerializedName("platforms")
         val platforms: List<Platform>,
         @SerializedName("playtime")
@@ -247,7 +247,7 @@ data class GamesResponse(
     }
 }
 
-fun GamesResponse.toGame() = this.results.map { it ->
+fun GamesResponse.toGame() = this.results.map {
     Game(
         it.id,
         it.name,
@@ -255,7 +255,7 @@ fun GamesResponse.toGame() = this.results.map { it ->
         it.backgroundImage,
         it.rating,
         it.ratingTop,
-        it.parentPlatforms.map { parent ->
+        it.parentPlatforms?.map { parent ->
             Game.Platform(
                 parent.platform.id,
                 parent.platform.slug

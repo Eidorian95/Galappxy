@@ -1,28 +1,46 @@
 package com.eidorian.rawgapigames.domain.usecases
 
+import com.eidorian.rawgapigames.data.entity.response.GamesResponse
 import com.eidorian.rawgapigames.data.entity.response.toGame
 import com.eidorian.rawgapigames.data.repository.GamesRepository
 import com.eidorian.rawgapigames.presentation.model.Game
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GetGamesUseCase @Inject constructor(private val repository: GamesRepository) {
+class GetGamesUseCase @Inject constructor(private val repository: GamesRepository) : BaseUSeCase() {
 
-    fun getGamesListRxJava(
+    fun getGamesList(
         onSuccess: ((t: List<Game>?) -> Unit),
         onError: ((t: Throwable) -> Unit)
     ) {
-        CompositeDisposable().add(
-            repository.getGamesListRxJava()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ gamesResponse ->
-                    onSuccess(gamesResponse.toGame())
-                }, { t ->
+        makeCall({ repository.getGamesList() },
+            object : UseCaseCallback<GamesResponse> {
+                override fun onSuccess(data: GamesResponse) {
+                    onSuccess(data.toGame())
+                }
+
+                override fun onError(t: Throwable) {
                     onError(t)
-                })
-        )
+                }
+            })
     }
+
+
+    fun searchGameByName(
+        name: String,
+        onSuccess: (t: List<Game>?) -> Unit,
+        onError: (t: Throwable) -> Unit
+    ) {
+        makeCall(
+            { repository.searchGameByName(name) },
+            object : UseCaseCallback<GamesResponse> {
+                override fun onSuccess(data: GamesResponse) {
+                    onSuccess(data.toGame())
+                }
+
+                override fun onError(t: Throwable) {
+                    onError(t)
+                }
+            })
+    }
+
 }

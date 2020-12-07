@@ -48,7 +48,7 @@ class ListGamesAdapter : RecyclerView.Adapter<ListViewHolder>() {
             //TODO: Set image rating (exceptional, recommended, meh, skip) using an Image Utils
         }
 
-        private fun setPlatformList(platforms: List<Game.Platform>) {
+        private fun setPlatformList(platforms: List<Game.Platform>?) {
             itemView.list_platform.adapter = ListPlatformAdapter().apply { setData(platforms) }
         }
     }

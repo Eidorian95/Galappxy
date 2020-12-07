@@ -2,8 +2,9 @@ package com.eidorian.rawgapigames.data.remote
 
 import javax.inject.Inject
 
-class GamesRemoteDataSource @Inject constructor(private val apiService: ApiService) :
-    BaseDataSource() {
+class GamesRemoteDataSource @Inject constructor(private val apiService: ApiService){
 
-    fun getGamesListRxJava() = apiService.getGamesListRxJava()
+    fun getGamesList() = apiService.getGamesList()
+
+    fun searchGameByName(name: String) = apiService.searchGameByName(name)
 }
