@@ -1,6 +1,8 @@
 package com.eidorian.rawgapigames.data.entity.response
 
 
+import com.eidorian.rawgapigames.presentation.model.Game
+import com.eidorian.rawgapigames.presentation.model.GameDetail
 import com.google.gson.annotations.SerializedName
 
 data class GameDetailsResponse(
@@ -53,7 +55,7 @@ data class GameDetailsResponse(
     @SerializedName("parent_achievements_count")
     val parentAchievementsCount: Int,
     @SerializedName("parent_platforms")
-    val parentPlatforms: List<ParentPlatform>,
+    val parentPlatforms: List<ParentPlatform>?,
     @SerializedName("parents_count")
     val parentsCount: Int,
     @SerializedName("platforms")
@@ -352,3 +354,19 @@ data class GameDetailsResponse(
         val slug: String
     )
 }
+
+fun GameDetailsResponse.toGameDetail() =
+    GameDetail(
+        id,
+        name,
+        backgroundImage,
+        rating,
+        parentPlatforms?.map { parent ->
+            Game.Platform(
+                parent.platform.id,
+                parent.platform.slug
+            )
+        },
+        descriptionRaw,
+        released
+    )
